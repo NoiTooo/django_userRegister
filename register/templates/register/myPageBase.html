@@ -1,0 +1,21 @@
+<!doctype html>
+{% load static %}
+{% load humanize %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Mypage Sample</title>
+</head>
+<body>
+    <nav>
+      <a href="{% url 'register:top' %}">Service</a>
+      <a href="{% url 'register:login' %}">ログイン</a>
+    </nav>
+    <div class="container mt-3">
+      {% block content %}
+      {% endblock %}
+    </div>
+</body>
+</html>

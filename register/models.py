@@ -2,7 +2,6 @@ from django.db import models
 from django.core.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 
@@ -36,21 +35,25 @@ class CustomUserManager(UserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル:emailアドレスをユーザー名として使う"""
-    email = models.EmailField(_('email address'), unique=True)
-    account_name = models.CharField(_('account name'), unique=True, max_length=30, blank=True, null=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True, null=True)
-    last_name = models.CharField(_('last name'), max_length=150, blank=True, null=True)
+    email = models.EmailField(verbose_name='email address', unique=True)
+    account_name = models.CharField(
+        verbose_name='account name', unique=True, max_length=30, blank=True, null=True)
+    first_name = models.CharField(
+        verbose_name='first name', max_length=30, blank=True, null=True)
+    last_name = models.CharField(
+        verbose_name='last name', max_length=150, blank=True, null=True)
 
     is_staff = models.BooleanField(
-        _('staff status'),
+        'staff status',
         default=False,
     )
     is_active = models.BooleanField(
-        _('active'),
+        'active',
         default=True,
     )
 
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_joined = models.DateTimeField(
+        verbose_name='date joined', default=timezone.now)
     objects = CustomUserManager()
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
@@ -59,8 +62,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         ordering = ['account_name']
         db_table = 'user'
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""

@@ -27,7 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django.contrib.humanize',
+    # rest framework
+    'rest_framework',
 
+    # apps
     'register.apps.RegisterConfig',
 ]
 
@@ -105,10 +108,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/staticfiles/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/mediafiles/'
 
 
 # カスタムユーザーを使う
@@ -118,10 +120,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # ログインページと、直接ログインページへ行った後のリダイレクトページ
 LOGIN_URL = 'register:login'
 LOGIN_REDIRECT_URL = 'register:top'
-# ログアウト後の遷移ページをオーバーライド
 LOGOUT_REDIRECT_URL = 'register:login'
 
-# メールをコンソールに表示する
+# sendEmail
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Gmailから送信
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -132,6 +133,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_USE_TLS = True
 # EMAIL_TIMEOUT = 300
 DEFAULT_FROM_EMAIL = ''
-
-
-
